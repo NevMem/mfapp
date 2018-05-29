@@ -69,8 +69,8 @@ class MainPage extends Component {
     })
   }
 
-  onTicketClicked(ev){
-    console.log(this)
+  onTicketClicked(number, id){
+    this.setState({ modalShow: true, modalInput: number })
   }
 
   logout(){
@@ -95,7 +95,7 @@ class MainPage extends Component {
   render(){
     return(
       <div id = 'wrapper'>
-        <Modal show = {this.state.modalShow} header = {this.state.modalHeader} input = {this.state.modalInput} />
+        <Modal show = {this.state.modalShow} header = {this.state.modalHeader} input = {this.state.modalInput} close = { e => { this.setState({ modalShow: false }) } } />
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
         <Header items = {menu} />
         <div className = 'main-section'>
@@ -146,7 +146,7 @@ class MainPage extends Component {
             <div className = 'row ticket-flow'>
               {this.props.tickets.map((el, index) => {
                 return (
-                  <Ticket key = {index} name = {el.name} number = {el.number} onTicketClicked = {this.onTicketClicked} />
+                  <Ticket key = {index} name = {el.name} number = {el.number} id = {el.id} onTicketClicked = {this.onTicketClicked.bind(this)} />
                   )
               })}
             </div>

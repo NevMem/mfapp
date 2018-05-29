@@ -83,15 +83,27 @@ input {
 	border-radius: 2px;
 	color: blue;
 	outline: none;
-}
-.small-btn {
-	min-width: 40px;
-	padding: 0px 10px;
-	font-size: 10px;
+	font-size: 1.1em;
 }
 .btn:hover {
 	color: white;
 	background-color: blue;
+}
+
+.btn-danger {
+	border-color: #DD2E44;
+	color: #DD2E44;
+}
+
+.btn-danger:hover {
+	color: white;
+	background-color: #DD2E44;
+}
+
+.small-btn {
+	min-width: 40px;
+	padding: 0px 10px;
+	font-size: 10px;
 }
 .login {
 	background-color: #53DD6C;
@@ -187,4 +199,14 @@ input {
 	padding-right: 20px;
 	height: 60px;
 	cursor: pointer;
+}
+.Modal > form {
+	display: flex;
+	flex-direction: column;
+	padding-left: 40px;
+	padding-right: 40px;
+	height: 440px;
+}
+.Modal > form > * {
+	margin-top: 40px;
 }

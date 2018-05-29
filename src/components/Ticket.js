@@ -15,9 +15,9 @@ class Ticket extends Component {
 	}
 
 	render(){
-		let clssName = this.isLucky() ? "ticket lucky" : "ticket"
+		let className = this.isLucky() ? "ticket lucky" : "ticket"
 		return (
-			<div className = {clssName} onClick = {this.props.onTicketClicked.bind(this)}>
+			<div className = {className} onClick = {() => this.props.onTicketClicked(this.props.number, this.props.id)}>
             	<div>Минтранс</div>
             	<div>{this.props.number}</div>
             	<div>Автобус</div>
