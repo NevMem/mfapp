@@ -6,6 +6,7 @@ import axios from 'axios'
 import LoginForm from './LoginForm.js'
 import api from '../api'
 import Ticket from './Ticket'
+import Modal from './Modal'
 
 const menu = [
   {
@@ -27,7 +28,10 @@ class MainPage extends Component {
     super(prps)
     this.state = {
       newticket: '',  
-      lastId: -1
+      lastId: -1, 
+      modalShow: false, 
+      modalHeader: 'Modify ticket', 
+      modalInput: ''
     }
   }
 
@@ -65,8 +69,7 @@ class MainPage extends Component {
     })
   }
 
-  onTicketClicked(){
-    console.log('here')
+  onTicketClicked(ev){
     console.log(this)
   }
 
@@ -75,10 +78,6 @@ class MainPage extends Component {
     localStorage.removeItem('email')
     localStorage.removeItem('token')
     this.props.dispatch({ type: 'LOGOUT', payload: {} })
-  }
-
-  showChangeForm(){
-
   }
   
   handleChange(event){
@@ -96,6 +95,7 @@ class MainPage extends Component {
   render(){
     return(
       <div id = 'wrapper'>
+        <Modal show = {this.state.modalShow} header = {this.state.modalHeader} input = {this.state.modalInput} />
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
         <Header items = {menu} />
         <div className = 'main-section'>

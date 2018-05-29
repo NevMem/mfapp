@@ -124,8 +124,9 @@ input {
 	min-width: 136px;
 	margin: 20px 20px;
 	min-height: 200px;
-	border: 2px solid #53DD6C;
-	color: #53DD6C;
+	border: 2px solid #0CCA4A;
+	/*background-color: #FAFDF6;*/
+	color: #0CCA4A;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -147,4 +148,43 @@ input {
 	line-height: 40px;
 	border-radius: 2px;
 	box-shadow: 0px 2px 10px rgba(45, 42, 50, .3);
+}
+.lucky {
+	color: #FB8B24;
+	border-color: #FB8B24;
+}
+.ModalBack {
+	 position: fixed;
+	 top: 0px;
+	 left: 0px;
+	 right: 0px;
+	 bottom: 0px;
+	 background-color: rgba(0, 0, 0, .3);
+}
+.Modal {
+	border-radius: 7px;
+	position: fixed;
+	top: calc((100vh - 500px) / 2);
+	left: calc((100vw - 600px) / 2);
+	width: 600px;
+	height: 500px;
+	background-color: #FAFDF6;
+}
+.modalHeading {
+	padding-left: 20px;
+	height: 60px;
+	width: 580px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	line-height: 60px;
+	color: black;
+	border-bottom: 1px solid red;
+}
+.modalHeading > .closeButton {
+	width: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 60px;
+	cursor: pointer;
 }
