@@ -16,7 +16,7 @@ const initialState = {
 function reducer(state = initialState, action){
 	switch(action.type){
 		case 'ADD': {
-			state = { ...state, tickets: [...state.tickets, { id: action.payload.id, number: action.payload.number, name: action.payload.name } ] }
+			state = { ...state, tickets: [ { id: action.payload.id, number: action.payload.number, name: action.payload.name }, ...state.tickets ] }
 			if(state.name && action.payload.name === state.name)
 				state.count += 1
 			return state

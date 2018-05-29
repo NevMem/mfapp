@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import LoginForm from './LoginForm.js'
 import api from '../api'
+import Ticket from './Ticket'
 
 const menu = [
   {
@@ -64,6 +65,11 @@ class MainPage extends Component {
     })
   }
 
+  onTicketClicked(){
+    console.log('here')
+    console.log(this)
+  }
+
   logout(){
     localStorage.removeItem('name')
     localStorage.removeItem('email')
@@ -72,7 +78,7 @@ class MainPage extends Component {
   }
 
   showChangeForm(){
-    
+
   }
   
   handleChange(event){
@@ -139,14 +145,9 @@ class MainPage extends Component {
             <h3>Последние добавленные билеты:</h3>
             <div className = 'row ticket-flow'>
               {this.props.tickets.map((el, index) => {
-                return ( 
-                  <div key = {index} className = 'ticket' onClick = {this.showChangeForm.bind(this)}>
-                    <div>Минтранс</div>
-                    <div>{el.number}</div>
-                    <div>Автобус</div>
-                    <div>{el.name}</div>
-                  </div>
-                )
+                return (
+                  <Ticket key = {index} name = {el.name} number = {el.number} onTicketClicked = {this.onTicketClicked} />
+                  )
               })}
             </div>
           </div>
