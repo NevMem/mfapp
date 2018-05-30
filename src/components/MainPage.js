@@ -31,7 +31,8 @@ class MainPage extends Component {
       lastId: -1, 
       modalShow: false, 
       modalHeader: 'Modify ticket', 
-      modalInput: ''
+      modalNumber: '', 
+      modalId: ''
     }
   }
 
@@ -70,7 +71,7 @@ class MainPage extends Component {
   }
 
   onTicketClicked(number, id){
-    this.setState({ modalShow: true, modalInput: number })
+    this.setState({ modalShow: true, modalNumber: number, modalId: id })
   }
 
   logout(){
@@ -92,10 +93,15 @@ class MainPage extends Component {
     this.props.dispatch({ type: 'LOGGED_IN', payload: { token: token, name: name, email: email } })
   }
 
+  changeTicketNumber = (id, number) => api.changeTicketNumber(id, number, this.props.token).then(res => {
+    return res
+  })
+
   render(){
     return(
       <div id = 'wrapper'>
-        <Modal show = {this.state.modalShow} header = {this.state.modalHeader} input = {this.state.modalInput} close = { e => { this.setState({ modalShow: false }) } } />
+        { this.state.modalShow && 
+          <Modal location = {this.props.location} changeTicketNumber = {this.changeTicketNumber.bind(this)} show = {this.state.modalShow} header = {this.state.modalHeader} number = {this.state.modalNumber} id = {this.state.modalId} close = { e => { this.setState({ modalShow: false }) } } /> }
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
         <Header items = {menu} />
         <div className = 'main-section'>
@@ -157,8 +163,8 @@ class MainPage extends Component {
   }
 }
 
-function getData(state) {
+function mapStateToProps(state) {
   return state
 }
 
-export default connect(getData)(MainPage)
+export default connect(mapStateToProps)(MainPage)

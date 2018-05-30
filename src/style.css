@@ -137,7 +137,6 @@ input {
 	margin: 20px 20px;
 	min-height: 200px;
 	border: 2px solid #0CCA4A;
-	/*background-color: #FAFDF6;*/
 	color: #0CCA4A;
 	display: flex;
 	flex-direction: column;
@@ -174,7 +173,7 @@ input {
 	 background-color: rgba(0, 0, 0, .3);
 }
 .Modal {
-	border-radius: 7px;
+	border-radius: 3px;
 	position: fixed;
 	top: calc((100vh - 500px) / 2);
 	left: calc((100vw - 600px) / 2);
@@ -209,4 +208,10 @@ input {
 }
 .Modal > form > * {
 	margin-top: 40px;
+}
+.error {
+	color: red;
+}
+.success {
+	color: #0CCA4A;
 }
