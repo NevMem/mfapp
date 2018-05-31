@@ -29,7 +29,7 @@ class Modal extends Component {
 					return
 				}
 				this.props.dispatch({ type: 'CHANGE', payload: { id: this.state.id, number: this.state.value } })
-				this.setState({ message: 'Reload page to see changes' })
+				this.setState({ message: 'Changed' })
 			})
 	}
 
@@ -43,7 +43,8 @@ class Modal extends Component {
 					this.setState({ errors: res.err })
 					return
 				}
-				this.setState({ message: 'Reload page to see changes' })
+				this.props.dispatch({ type: 'DELETE', payload: { id: this.state.id } })
+				this.setState({ message: 'Deleted' })
 			})
 	}
 

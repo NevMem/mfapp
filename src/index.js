@@ -22,9 +22,14 @@ function reducer(state = initialState, action){
 			return state
 		}
 		case 'DELETE': {
-			state = Object.assign({}, state)
-			console.log(action)
-			return state
+			return { ...state, tickets: state.tickets.filter(ticket => ticket.id !== action.payload.id) }
+		}
+		case 'CHANGE': {
+			return { ...state, tickets: state.tickets.map(ticket => {
+				if (ticket.id === action.payload.id)
+					ticket.number = action.payload.number
+				return ticket
+			}) }
 		}
 		case 'LOGGED_IN': {
 			state = { ...state, name: action.payload.name, email: action.payload.email, token: action.payload.token }
@@ -38,8 +43,8 @@ function reducer(state = initialState, action){
 			state = { ...state, name: '', email: '', token: '' }
 			return state
 		}
-		default:{
-			console.log(action)
+		default: {
+			console.log('Unknown action', action.type)
 			return state	
 		}
 	}
