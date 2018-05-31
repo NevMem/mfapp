@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import api from '../api.js'
 
 class LoginForm extends Component {
 	constructor(props){
@@ -23,15 +23,18 @@ class LoginForm extends Component {
 		event.preventDefault()
 		if(this.state.loginTab){
 			this.setState({ lastMessage: '' })
-			axios.post('/login', { login: this.state.formLogin, password: this.state.formPassword }).then((res) => {
-				res = res.data
-				if(res.err){
-					this.setState({ lastMessage: res.message })
-				} else {
-					res = res.user
-					this.props.loggedIn(res.token, res.name, res.email)
-				}
-			})
+			api.login(this.state.formLogin, this.state.formPassword)
+				.then(data => {
+					if(data.err){
+						this.setState({ lastMessage: data.message })
+					} else {
+						let user = data.user
+						this.props.loggedIn(user.token, user.name, user.email)
+					}
+				})
+				.catch(err => {
+					this.setState({ lastMessage: err })
+				})
 		} else {
 			this.setState({ loginTab: !this.state.loginTab })
 		}
@@ -40,15 +43,14 @@ class LoginForm extends Component {
 	signUpButtonClick(event){
 		event.preventDefault()
 		if(!this.state.loginTab){
-			axios.post('/register', { login: this.state.formLogin, name: this.state.formName, email: this.state.formEmail, password: this.state.formPassword }).then((res) => {
-				res = res.data
-				if(res.err){
-					alert(res.message)
-				} else {
-					res = res.user
-					this.props.loggedIn(res.token, res.name, res.email)
-				}
-			})
+			api.register(this.state.formLogin, this.state.formPassword, this.state.formName, this.state.formEmail)
+				.then(data => {
+					if(data.err){
+						this.setState({ lastMessage: data.message })
+					} else {
+						this.props.loggedIn(data.user.token, data.user.name, data.user.name)
+					}
+				})
 		} else {
 			this.setState({ loginTab: !this.state.loginTab })
 		}
@@ -58,6 +60,7 @@ class LoginForm extends Component {
 		if(!this.state.loginTab) return (
 			<form className = 'signup-form'>
 		        <h1>Login or sign up</h1>
+		        {this.state.lastMessage && (<h3 style = {{ color: '#E4572E' }}>{this.state.lastMessage}</h3>)}
 		        <input type = 'text' id = 'formName' value = {this.state.formName} onChange = {this.handleChange.bind(this)} placeholder = 'Name' />
 		        <input type = 'email' id = 'formEmail' value = {this.state.formEmail} onChange = {this.handleChange.bind(this)} placeholder = 'E-mail' />
 		        <input type = 'text' id = 'formLogin' value = {this.state.formLogin} onChange = {this.handleChange.bind(this)} placeholder = 'Login' />
