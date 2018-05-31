@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import closeIcon from '../close.svg'
+import { connect } from 'react-redux'
 
 class Modal extends Component {
 	constructor(props){
@@ -19,15 +20,31 @@ class Modal extends Component {
 
 	changeButtonClick(ev){
 		ev.preventDefault()
-		this.setState({ errors: '' })
-		this.props.changeTicketNumber(this.state.id, this.state.value).then(res => {
-			res = res.data
-			if(res.err){
-				this.setState({errors: res.err})
-				return
-			}
-			this.setState({ message: 'Reload page to see changes' })
-		})
+		this.setState({ errors: '', message: '' })
+		this.props.changeTicketNumber(this.state.id, this.state.value)
+			.then(res => {
+				res = res.data
+				if(res.err){
+					this.setState({errors: res.err})
+					return
+				}
+				this.props.dispatch({ type: 'CHANGE', payload: { id: this.state.id, number: this.state.value } })
+				this.setState({ message: 'Reload page to see changes' })
+			})
+	}
+
+	deleteButtonClick(ev){
+		ev.preventDefault()
+		this.setState({ errors: '', message: '' })
+		this.props.deleteTicket(this.state.id)
+			.then(res => {
+				res = res.data
+				if(res.err){
+					this.setState({ errors: res.err })
+					return
+				}
+				this.setState({ message: 'Reload page to see changes' })
+			})
 	}
 
 	render(){
@@ -48,7 +65,7 @@ class Modal extends Component {
 						<input type = 'text' value = {this.state.value} onChange = {this.onChange.bind(this)} placeholder = 'Enter new ticket number' />
 						<div className = 'row'>
 							<button className = 'btn' onClick = {this.changeButtonClick.bind(this)}>CHANGE</button>
-							<button className = 'btn btn-danger' onClick = { e => e.preventDefault() }>DELETE</button>
+							<button className = 'btn btn-danger' onClick = {this.deleteButtonClick.bind(this)}>DELETE</button>
 						</div>
 					</form>
 				</div>
@@ -57,4 +74,8 @@ class Modal extends Component {
 	}
 }
 
-export default Modal
+function mapStateToProps(state){
+	return state
+}
+
+export default connect(mapStateToProps)(Modal)

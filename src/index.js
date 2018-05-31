@@ -21,6 +21,11 @@ function reducer(state = initialState, action){
 				state.count += 1
 			return state
 		}
+		case 'DELETE': {
+			state = Object.assign({}, state)
+			console.log(action)
+			return state
+		}
 		case 'LOGGED_IN': {
 			state = { ...state, name: action.payload.name, email: action.payload.email, token: action.payload.token }
 			state.count = 0
@@ -33,7 +38,10 @@ function reducer(state = initialState, action){
 			state = { ...state, name: '', email: '', token: '' }
 			return state
 		}
-		default: return state
+		default:{
+			console.log(action)
+			return state	
+		}
 	}
 }
 

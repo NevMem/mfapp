@@ -93,15 +93,17 @@ class MainPage extends Component {
     this.props.dispatch({ type: 'LOGGED_IN', payload: { token: token, name: name, email: email } })
   }
 
-  changeTicketNumber = (id, number) => api.changeTicketNumber(id, number, this.props.token).then(res => {
-    return res
-  })
+  changeTicketNumber = (id, number) => api.changeTicketNumber(id, number, this.props.token)
+    .then(res => res)
+
+  deleteTicket = (id) => api.deleteTicket(id, this.props.token)
+    .then(res => res)
 
   render(){
     return(
       <div id = 'wrapper'>
         { this.state.modalShow && 
-          <Modal location = {this.props.location} changeTicketNumber = {this.changeTicketNumber.bind(this)} show = {this.state.modalShow} header = {this.state.modalHeader} number = {this.state.modalNumber} id = {this.state.modalId} close = { e => { this.setState({ modalShow: false }) } } /> }
+          <Modal location = {this.props.location} deleteTicket = {this.deleteTicket.bind(this)} changeTicketNumber = {this.changeTicketNumber.bind(this)} show = {this.state.modalShow} header = {this.state.modalHeader} number = {this.state.modalNumber} id = {this.state.modalId} close = { e => { this.setState({ modalShow: false }) } } /> }
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
         <Header items = {menu} />
         <div className = 'main-section'>
