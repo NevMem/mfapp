@@ -5,11 +5,11 @@ class LoginForm extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			loginTab: true, 
-			formName: 'NevMem', 
-		    formEmail: 'not', 
-		    formLogin: 'mfls', 
-		    formPassword: 'lsmls',
+			loginTab: false, 
+			formName: '', 
+		    formEmail: '', 
+		    formLogin: '', 
+		    formPassword: '',
 		    lastMessage: ''
 		}
 	}
