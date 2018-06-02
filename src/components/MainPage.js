@@ -32,7 +32,8 @@ class MainPage extends Component {
       modalShow: false, 
       modalHeader: 'Modify ticket', 
       modalNumber: '', 
-      modalId: ''
+      modalId: '', 
+      newTicketError: ''
     }
   }
 
@@ -60,12 +61,13 @@ class MainPage extends Component {
 
   addTicketButtonClicked(){
     let ticketNumber = this.state.newticket
+    this.setState({ newTicketError: '' })
     api.addTicket(ticketNumber, this.props.name, this.props.token).then(msg => {
       msg = msg.data
       if(msg.err){
-        alert(msg.err)
+        this.setState({ newTicketError: msg.err })
       } else {
-        this.setState({ 'newticket': '' })
+        this.setState({ newticket: '' })
       }
     })
   }
@@ -130,12 +132,13 @@ class MainPage extends Component {
                         <h4>{this.props.email}</h4>
                       </div>
                       <div className = 'row'>
-                        <h3>Count of tickets:</h3>
+                        <h3>Count of loaded tickets:</h3>
                         <h4>{this.props.count}</h4>
                       </div>
                     </div>
                     <div>
                       <h3>Add ticket</h3>
+                      {this.state.newTicketError && (<h3 style = {{ color: '#E4572E' }}>{this.state.newTicketError}</h3>)}
                       <div className = 'row'>
                         <input style = {{ 'width': '200px' }} type = 'text' id = 'newticket' value = {this.state.newticket} onChange = {this.handleChange.bind(this)} placeholder = 'Ticket number' />
                         <button className = 'btn' onClick = {this.addTicketButtonClicked.bind(this)}>ADD</button>

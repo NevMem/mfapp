@@ -22,7 +22,8 @@ function reducer(state = initialState, action){
 			return state
 		}
 		case 'DELETE': {
-			return { ...state, tickets: state.tickets.filter(ticket => ticket.id !== action.payload.id) }
+			state = { ...state, tickets: state.tickets.filter(ticket => ticket.id !== action.payload.id) }
+			return state
 		}
 		case 'CHANGE': {
 			return { ...state, tickets: state.tickets.map(ticket => {
@@ -44,7 +45,6 @@ function reducer(state = initialState, action){
 			return state
 		}
 		default: {
-			console.log('Unknown action', action.type)
 			return state	
 		}
 	}

@@ -10,7 +10,6 @@ export default {
 	deleteTicket: (id, token) => axios.post('/api/deleteTicket', { id: id, token: token }), 
 	
 	login: (login, password) => axios.post('/api/login', { login: login, password: password }).then(res => {
-		console.log('here')
 		return res.data
 	}).catch(msg => {
 		return msg.response.data
