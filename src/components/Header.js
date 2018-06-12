@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom' 
 
 class Header extends Component {
 	render(){
@@ -7,7 +8,7 @@ class Header extends Component {
 				<div className = 'container row'>
 					<h1>Bus ticket tracker</h1>
 					{this.props.items.map((el, index) => {
-						return <a href = {el.link} key = {index}>{el.label}</a>
+						return <Link to = {el.link} key = {index}>{el.label}</Link>
 					})}
 				</div>
 			</div>
