@@ -215,3 +215,103 @@ input {
 .success {
 	color: #0CCA4A;
 }
+
+.chat {
+	position: fixed;
+	left: 20px;
+	bottom: 0px;
+	width: 450px;
+
+	display: flex;
+	flex-direction: column;
+}
+.chat-header {
+	font-size: 30px;
+	background-color: #2D2A32;
+	color: #DDD92A;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+.chat-body {
+	height: 500px;
+	display: flex;
+	background-color: white;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.chat-area {
+	display: flex;
+	flex-direction: column;	
+	padding: 10px 10px;
+	overflow-y: scroll;
+	height: 100%;
+}
+.chat-message {
+	display: block;
+	flex-direction: row;
+	justify-content: space-between;
+	line-height: 30px;
+	padding: 4px 0px;
+}
+
+.my-message {
+	flex-direction: row-reverse;
+}
+
+.chat-message-name {
+	width: 100px;
+	color: #0CCA4A;
+}
+
+.my-message > .chat-message-name {
+	text-align: right;
+}
+.my-message > .chat-message-text {
+	text-align: left;
+}
+
+.chat-message-time {
+	font-size: 10px;
+	line-height: 14px;
+}
+
+.chat-message-text {
+	color: black;
+	width: 300px;
+	text-align: right;
+	background-color: rgba(45, 42, 50, 0.04);
+	border-radius: 10px;
+	padding: 10px 10px;
+
+	display: flex;
+	flex-direction: column;
+}
+.chat-input {
+	height: 30px;
+	border: none;
+	background-color: #0CCA4A;
+	color: white;
+}
+.chat-input::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.83);
+}
+
+.chat ::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+}
+.chat ::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+	background-color: rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+}
+.chat ::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+.chat ::-webkit-scrollbar-corner {
+    background-color: transparent;
+}

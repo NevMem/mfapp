@@ -7,6 +7,7 @@ import LoginForm from './LoginForm.js'
 import api from '../api'
 import Ticket from './Ticket'
 import Modal from './Modal'
+import Chat from './Chat.js'
 
 const menu = [
   {
@@ -43,7 +44,7 @@ class MainPage extends Component {
       if(data.length !== 0){
         let newLastId = Math.max(data[0].id, data[data.length - 1].id)
         for (let ticket of data)
-          this.props.dispatch({ type: 'ADD', payload: ticket })
+          this.props.dispatch({ type: 'ADD_FRONT', payload: ticket })
         this.setState({ lastId: newLastId })
       }
 
@@ -57,6 +58,7 @@ class MainPage extends Component {
 
   componentDidMount(){
     this.reload()
+    window.addEventListener('scroll', this.handleScroll.bind(this))
   }
 
   addTicketButtonClicked(){
@@ -101,9 +103,14 @@ class MainPage extends Component {
   deleteTicket = (id) => api.deleteTicket(id, this.props.token)
     .then(res => res)
 
+  handleScroll = (ev) => {
+    console.log(document.documentElement.scrollTop)
+  }
+
   render(){
     return(
       <div id = 'wrapper'>
+        {this.props.name && <Chat/>}
         { this.state.modalShow && 
           <Modal location = {this.props.location} deleteTicket = {this.deleteTicket.bind(this)} changeTicketNumber = {this.changeTicketNumber.bind(this)} show = {this.state.modalShow} header = {this.state.modalHeader} number = {this.state.modalNumber} id = {this.state.modalId} close = { e => { this.setState({ modalShow: false }) } } /> }
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
