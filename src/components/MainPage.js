@@ -42,6 +42,7 @@ class MainPage extends Component {
     axios.post('/api/tickets', { lastId: this.state.lastId }).then((res) => {
       let data = res.data
       if(data.length !== 0){
+        console.log('received data:', data.length)
         let newLastId = Math.max(data[0].id, data[data.length - 1].id)
         for (let ticket of data)
           this.props.dispatch({ type: 'ADD_FRONT', payload: ticket })
@@ -104,7 +105,7 @@ class MainPage extends Component {
     .then(res => res)
 
   handleScroll = (ev) => {
-    console.log(document.documentElement.scrollTop)
+    //console.log(document.documentElement.scrollTop)
   }
 
   render(){

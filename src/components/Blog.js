@@ -19,7 +19,7 @@ const menu = [
 class Blog extends Component {
 	constructor(props){
 		super(props)
-		console.log(this.props)
+		console.log('hello from Blog constructor')
 	}
 
 	render(){
