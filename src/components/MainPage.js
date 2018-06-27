@@ -29,7 +29,7 @@ class MainPage extends Component {
     super(prps)
     this.state = {
       newticket: '',  
-      lastId: -1, 
+      lastTime: -1, 
       modalShow: false, 
       modalHeader: 'Modify ticket', 
       modalNumber: '', 
@@ -39,14 +39,13 @@ class MainPage extends Component {
   }
 
   reload(){
-    axios.post('/api/tickets', { lastId: this.state.lastId }).then((res) => {
+    axios.post('/api/tickets', { startTime: this.state.lastTime }).then((res) => {
       let data = res.data
       if(data.length !== 0){
-        console.log('received data:', data.length)
-        let newLastId = Math.max(data[0].id, data[data.length - 1].id)
+        let newLastTime = Math.max(data[0].time, data[data.length - 1].time)
         for (let ticket of data)
           this.props.dispatch({ type: 'ADD_FRONT', payload: ticket })
-        this.setState({ lastId: newLastId })
+        this.setState({ lastTime: newLastTime })
       }
 
       this.registerReloader()
@@ -139,10 +138,6 @@ class MainPage extends Component {
                         <h3>Email:</h3>
                         <h4>{this.props.email}</h4>
                       </div>
-                      <div className = 'row'>
-                        <h3>Count of loaded tickets:</h3>
-                        <h4>{this.props.count}</h4>
-                      </div>
                     </div>
                     <div>
                       <h3>Add ticket</h3>
@@ -165,7 +160,7 @@ class MainPage extends Component {
             <div className = 'row ticket-flow'>
               {this.props.tickets.map((el, index) => {
                 return (
-                  <Ticket key = {index} name = {el.name} number = {el.number} id = {el.id} onTicketClicked = {this.onTicketClicked.bind(this)} />
+                  <Ticket key = {index} name = {el.owner} number = {el.number} id = {el.id} onTicketClicked = {this.onTicketClicked.bind(this)} />
                   )
               })}
             </div>

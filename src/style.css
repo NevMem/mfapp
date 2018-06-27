@@ -31,7 +31,25 @@
 #header a {
 	color: #FAFDF6;
 	text-decoration: none;
+	position: relative;
 }
+
+#header a::after {
+	content: '';
+	position: absolute;
+	bottom: 20px;
+	left: 0px;
+	background-color: #DDD92A;
+	width: 0px;
+	height: 3px;
+	transition: all ease-in .1s;
+}
+
+#header a:hover::after {
+	width: 40px;
+	height: 3px;
+}
+
 #header h1 {
 	color: #DDD92A;
 }
@@ -146,7 +164,7 @@ input {
 	transition: all ease-in .2s;
 }
 .ticket:hover {
-	box-shadow: 0px 3px 8px rgba(51, 49, 56, .3);	
+	box-shadow: 0px 3px 8px rgba(51, 49, 56, .3);
 }
 .profile {
 	background-color: #FAFDF6;
@@ -243,7 +261,7 @@ input {
 	display: flex;
 	flex-direction: column;	
 	padding: 10px 10px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	height: 100%;
 }
 .chat-message {
@@ -314,4 +332,73 @@ input {
 }
 .chat ::-webkit-scrollbar-corner {
     background-color: transparent;
+}
+
+:root {
+	--loader-color: #35CE8D;
+}
+
+.loader {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	/* background-color: #2D2A32; */
+	min-height: 100px;
+	align-items: center;
+	perspective: 1000px;
+}
+
+.loader > .column {
+	width: 1px;
+	height: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
+	position: relative;
+	animation: rotation .7s linear infinite;
+	background-color: var(--loader-color);
+}
+
+.column > .dot-top {
+	border-radius: 50%;
+	width: 7px;
+	height: 7px;
+	position: absolute;
+	top: 0px;
+	left: -3px;
+	background-color: var(--loader-color);
+}
+
+.column > .dot-bottom {
+	border-radius: 50%;
+	width: 7px;
+	height: 7px;
+	position: absolute;
+	bottom: 0px;
+	left: -3px;
+	background-color: var(--loader-color);
+}
+
+.column:nth-child(1) {
+	--column-index: 0deg;
+}
+.column:nth-child(2) {
+	--column-index: 25deg;
+}
+.column:nth-child(3) {
+	--column-index: 50deg;
+}
+.column:nth-child(4) {
+	--column-index: 75deg;
+}
+.column:nth-child(5) {
+	--column-index: 100deg;
+}
+
+@keyframes rotation {
+	from {
+		transform: rotateX(calc(0deg + var(--column-index, 0deg)));
+	}
+	to {
+		transform: rotateX(calc(180deg + var(--column-index, 0deg)));
+	}
 }

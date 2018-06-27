@@ -9,22 +9,17 @@ import { Route, BrowserRouter } from 'react-router-dom'
 const initialState = {
 	tickets: [], 
 	name: '', 
-	email: '', 
-	count: 0
+	email: ''
 }
 
 function reducer(state = initialState, action){
 	switch(action.type){
 		case 'ADD_FRONT': {
-			state = { ...state, tickets: [ { id: action.payload.id, number: action.payload.number, name: action.payload.name }, ...state.tickets ] }
-			if(state.name && action.payload.name === state.name)
-				state.count += 1
+			state = { ...state, tickets: [ { id: action.payload._id, number: action.payload.number, owner: action.payload.owner }, ...state.tickets ] }
 			return state
 		}
 		case 'ADD_BACK': {
-			state = { ...state, tickets: [ ...state.tickets, { id: action.payload.id, number: action.payload.number, name: action.payload.name } ] }
-			if(state.name && state.payload.name === state.name)
-				state.count += 1
+			state = { ...state, tickets: [ ...state.tickets, { id: action.payload._id, number: action.payload.number, owner: action.payload.owner } ] }
 			return state
 		}
 		case 'DELETE': {
@@ -40,10 +35,6 @@ function reducer(state = initialState, action){
 		}
 		case 'LOGGED_IN': {
 			state = { ...state, name: action.payload.name, email: action.payload.email, token: action.payload.token }
-			state.count = 0
-			for (let ticket of state.tickets)
-				if (ticket.name === action.payload.name)
-					state.count += 1
 			return state
 		}
 		case 'LOGOUT': {

@@ -130,6 +130,15 @@ class Chat extends Component {
                                         </div>
                                     ) 
                             })}
+                            {!this.state.connected && (
+                                <div className = 'loader'>
+                                    <div className = 'column'><div className = 'dot-top'></div><div className = 'dot-bottom'></div></div>
+                                    <div className = 'column'><div className = 'dot-top'></div><div className = 'dot-bottom'></div></div>
+                                    <div className = 'column'><div className = 'dot-top'></div><div className = 'dot-bottom'></div></div>
+                                    <div className = 'column'><div className = 'dot-top'></div><div className = 'dot-bottom'></div></div>
+                                    <div className = 'column'><div className = 'dot-top'></div><div className = 'dot-bottom'></div></div>
+                                </div>
+                            )}
                         </div>
                         <input placeholder = 'Type something' onChange = {this.handleChange.bind(this)} onKeyPress = {this.handleKeyPress.bind(this)} value = {this.state.clientMessage} type = 'text' className = 'chat-input' />
                     </div>
